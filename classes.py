@@ -3,7 +3,8 @@ from sys import exit
 class Scene(object):
 
     def enter(self):
-        pass
+        print "This scene is not yet configured. Subclass it and implement enter()."
+        exit(1)
 
 class Engine(object):
 
