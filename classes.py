@@ -1,10 +1,12 @@
 from sys import exit
 from random import randint
 
+
 def exit_bad_selection():
     print "Error: you should not have got to this point."
     print "Our apologies, please restart the story."
     exit(1)
+
 
 def code_generation(victim):
 
@@ -45,6 +47,7 @@ def code_generation(victim):
 
     return str(code)
 
+
 class Victim(object):
 
     names = [
@@ -75,11 +78,12 @@ class Victim(object):
 
     def __init__(self):
 
-        self.name = self.names[randint(0,len(self.names) - 1)]
+        self.name = self.names[randint(0, len(self.names) - 1)]
 
         self.code = code_generation(self.name)
 
 girl = Victim()
+
 
 class Scene(object):
 
@@ -87,13 +91,16 @@ class Scene(object):
         self.VISITS = 0
 
     def enter(self):
-        print "This scene is not yet configured. Subclass it and implement enter()."
+        print "This scene is not yet configured. Subclass it and implement ",
+        print "enter()."
         exit(1)
 
     def show_hints(self, hints):
         print "="*10
-        for line in hints: print line
+        for line in hints:
+            print line
         print "="*10
+
 
 class Engine(object):
 
@@ -109,6 +116,7 @@ class Engine(object):
             current_scene = self.scene_map.next_scene(next_scene_name)
 
         current_scene.enter()
+
 
 class Opening(Scene):
 
@@ -126,6 +134,7 @@ class Opening(Scene):
         print "balustrade. The investigation begins...\n\n"
         return 'outside'
 
+
 class Outside(Scene):
 
     hints = [
@@ -134,7 +143,6 @@ class Outside(Scene):
     ]
 
     def enter(self):
-
 
         if self.VISITS == 0:
             print "You look around at the overgrown gardens surrounding the "
@@ -169,6 +177,7 @@ class Outside(Scene):
                 print "That option is not valid here."
                 continue
 
+
 class Porch(Scene):
 
     hints = [
@@ -201,6 +210,7 @@ class Porch(Scene):
             else:
                 print "That option is not valid here."
                 continue
+
 
 class Hallway(Scene):
 
@@ -250,6 +260,7 @@ class Hallway(Scene):
                 print "That option is not valid here."
                 continue
 
+
 class Reception(Scene):
 
     hints = [
@@ -295,6 +306,7 @@ class Reception(Scene):
                 print "That option is not valid here."
                 continue
 
+
 class Lounge(Scene):
 
     hints = [
@@ -331,6 +343,7 @@ class Lounge(Scene):
                 print "That option is not valid here."
                 continue
 
+
 class Kitchen(Scene):
 
     hints = [
@@ -366,6 +379,7 @@ class Kitchen(Scene):
             else:
                 print "That option is not valid here."
                 continue
+
 
 class DiningRoom(Scene):
 
@@ -405,6 +419,7 @@ class DiningRoom(Scene):
             else:
                 print "That option is not valid here."
                 continue
+
 
 class Landing(Scene):
 
@@ -448,21 +463,21 @@ class Landing(Scene):
                     self.hints.remove("examine the landing area more closely")
                     continue
                 elif choice == "go to the back room" or \
-                choice == "go to the bathroom":
+                        choice == "go to the bathroom":
                     try:
                         self.hints.remove("go to the back room")
                         self.hints.append("go to the bathroom")
                     finally:
                         return 'bathroom'
                 elif choice == "go to the front left room" or \
-                choice == "go to the front left bedroom":
+                        choice == "go to the front left bedroom":
                     try:
                         self.hints.remove("go to the front left room")
                         self.hints.append("go to the front left bedroom")
                     finally:
                         return 'bedroom_1'
                 elif choice == "go to the back left room" or \
-                choice == "go to the back left bedroom":
+                        choice == "go to the back left bedroom":
                     try:
                         print "You walk into the main bedroom."
                         self.hints.remove("go to the back left room")
@@ -472,7 +487,7 @@ class Landing(Scene):
                 elif choice == "go to the back right room":
                         return 'bedroom_3'
                 elif choice == "go to the front right room" or \
-                choice == "go to the front right bedroom":
+                        choice == "go to the front right bedroom":
                     try:
                         self.hints.remove("go to the front right room")
                         self.hints.append("go to the front right bedroom")
@@ -485,6 +500,7 @@ class Landing(Scene):
             else:
                 print "That option is not valid here."
                 continue
+
 
 class Bedroom1(Scene):
 
@@ -518,6 +534,7 @@ class Bedroom1(Scene):
             else:
                 print "That option is not valid here."
                 continue
+
 
 class Bedroom2(Scene):
 
@@ -598,8 +615,10 @@ class Bedroom2(Scene):
                     while True:
                         if self.ATTEMPTS >= 5 and self.ATTEMPTS % 5 == 0:
                             if Bedroom3.NAME_KNOWN == 1:
-                                print "You need to keep going for %s!" % girl.name
-                                print "What if her captor user her name as the code?"
+                                print "You need to keep going for %s!" \
+                                    % girl.name
+                                print "What if her captor used her name as ",
+                                print "the code?"
                                 if self.ATTEMPTS >= 10:
                                     print "*** HINT ***"
                                     print "============="
@@ -611,7 +630,7 @@ class Bedroom2(Scene):
                                     print "PQRS TUV WXYZ"
                                     print "============="
                             else:
-                                print "Maybe there are more clues in the house?"
+                                print "Maybe there is a clue in the house?"
 
                         else:
                             pass
@@ -643,6 +662,7 @@ class Bedroom2(Scene):
                 print "That option is not valid here."
                 continue
 
+
 class Bedroom3(Scene):
 
     hints = [
@@ -672,7 +692,8 @@ class Bedroom3(Scene):
             print "The walls are covered in newspaper clippings and"
             print "photographs. The articles are about a girl who disappeared"
             print "ten years ago, not long after you had joined the force. She"
-            print "went missing outside of her home, no one had seen her since."
+            print "went missing outside of her home, no one had seen her"
+            print "since."
             print "Her name was %s." % girl.name
             print "The photographs... they are of her... most around the age"
             print "she was when she went missing but some... some of them are"
@@ -700,6 +721,7 @@ class Bedroom3(Scene):
             else:
                 print "That option is not valid here."
                 continue
+
 
 class Bedroom4(Scene):
 
@@ -734,6 +756,7 @@ class Bedroom4(Scene):
             else:
                 print "That option is not valid here."
                 continue
+
 
 class Bathroom(Scene):
 
@@ -773,6 +796,7 @@ class Bathroom(Scene):
                 print "That option is not valid here."
                 continue
 
+
 class Loft(Scene):
 
     def enter(self):
@@ -810,6 +834,7 @@ class Loft(Scene):
 
         return 'finished'
 
+
 class Finished(Scene):
 
     def enter(self):
@@ -817,6 +842,7 @@ class Finished(Scene):
         print "Thank you for playing along with this interactive story."
         print "=" * 40
         exit(0)
+
 
 class Map(object):
 
