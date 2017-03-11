@@ -596,11 +596,11 @@ class Bedroom2(Scene):
                         print "%d digit code." % len(girl.code)
                     print "*** NOTE: Enter C to go back to the room ***"
                     while True:
-                        if self.ATTEMPTS >= 10 and self.ATTEMPTS % 5 == 0:
+                        if self.ATTEMPTS >= 5 and self.ATTEMPTS % 5 == 0:
                             if Bedroom3.NAME_KNOWN == 1:
                                 print "You need to keep going for %s!" % girl.name
                                 print "What if her captor user her name as the code?"
-                                if self.ATTEMPTS >= 30:
+                                if self.ATTEMPTS >= 10:
                                     print "*** HINT ***"
                                     print "============="
                                     print "  1   2   3  "
